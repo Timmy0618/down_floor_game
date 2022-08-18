@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  downfloor:
+    image: wujidadi/ap:1.4-arm
+    container_name: ${Container_Name_Prefix}-downfloor
+    restart: unless-stopped
+    ports:
+      - "${Port_downfloor}:80"
+    volumes:
+      - ${Volumn_downfloor_Path}:/var/www/html
+    networks:
+      extnet:
+        ipv4_address: ${IPv4_downfloor}
+
+networks:
+  extnet:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: ${Network_Subnet}
